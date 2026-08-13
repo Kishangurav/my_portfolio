@@ -68,3 +68,17 @@ hoverElements.forEach((element) => {
     cursorGlow.classList.remove("hover");
   });
 });
+
+document.body.classList.add("intro-active");
+
+const introScreen = document.getElementById("intro-screen");
+const enterButton = document.getElementById("enter-btn");
+
+enterButton.addEventListener("click", () => {
+  introScreen.classList.add("hide");
+  document.body.classList.remove("intro-active");
+
+  setTimeout(() => {
+    introScreen.style.display = "none";
+  }, 1000);
+});

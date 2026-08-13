@@ -892,3 +892,216 @@ footer p {
     display: none;
   }
 }
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #0f0f1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 1s cubic-bezier(.77,0,.18,1), opacity .8s ease;
+}
+
+#intro-screen::before {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96,25,203,.2), transparent 65%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  animation: introGlow 5s ease-in-out infinite;
+}
+
+#intro-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 55px 55px;
+  pointer-events: none;
+}
+
+@keyframes introGlow {
+  0%,100% {
+    transform: translate(-50%,-50%) scale(1);
+    opacity: .6;
+  }
+  50% {
+    transform: translate(-50%,-50%) scale(1.2);
+    opacity: 1;
+  }
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 30px;
+}
+
+.intro-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg,var(--purple),var(--purple-light));
+  margin: 0 auto 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--purple);
+  animation: introLine 1.2s ease forwards;
+}
+
+@keyframes introLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+.intro-label {
+  color: var(--purple-light);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+  animation: introUp 1s .2s both;
+}
+
+.intro-content h1 {
+  font-size: clamp(2.5rem,7vw,5.5rem);
+  line-height: 1.1;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg,#fff,var(--purple-light),#fff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: introUp 1s .4s both, gradientText 5s linear infinite;
+}
+
+.intro-role {
+  color: var(--text-muted);
+  font-size: clamp(.95rem,2vw,1.2rem);
+  margin-bottom: 40px;
+  animation: introUp 1s .6s both;
+}
+
+.intro-role span {
+  color: var(--purple-light);
+  margin: 0 8px;
+}
+
+#enter-btn {
+  position: relative;
+  z-index: 3;
+  padding: 15px 28px;
+  border: 1px solid rgba(169,112,255,.5);
+  border-radius: 8px;
+  background: rgba(96,25,203,.15);
+  color: #fff;
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: .4s ease;
+  animation: introUp 1s .8s both;
+  overflow: hidden;
+}
+
+#enter-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,transparent,rgba(169,112,255,.25),transparent);
+  transform: translateX(-100%);
+  transition: .6s ease;
+}
+
+#enter-btn:hover::before {
+  transform: translateX(100%);
+}
+
+#enter-btn:hover {
+  background: var(--purple);
+  border-color: var(--purple-light);
+  transform: translateY(-4px);
+  box-shadow:
+    0 10px 35px rgba(96,25,203,.45),
+    0 0 25px rgba(169,112,255,.25);
+}
+
+#enter-btn i {
+  transition: .3s ease;
+}
+
+#enter-btn:hover i {
+  transform: translateX(5px);
+}
+
+.intro-counter {
+  position: absolute;
+  right: 40px;
+  bottom: 35px;
+  z-index: 2;
+  color: var(--text-muted);
+  font-size: .75rem;
+  letter-spacing: 2px;
+}
+
+.intro-counter span {
+  color: var(--purple-light);
+  margin: 0 5px;
+}
+
+@keyframes introUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#intro-screen.hide {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+@media (max-width:600px) {
+  .intro-label {
+    font-size: .7rem;
+    letter-spacing: 2px;
+  }
+
+  .intro-role {
+    font-size: .9rem;
+  }
+
+  #enter-btn {
+    padding: 13px 22px;
+  }
+
+  .intro-counter {
+    right: 20px;
+    bottom: 20px;
+  }
+}
