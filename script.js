@@ -74,11 +74,27 @@ document.body.classList.add("intro-active");
 const introScreen = document.getElementById("intro-screen");
 const enterButton = document.getElementById("enter-btn");
 
+const backgroundMusic = document.getElementById("background-music");
+
 enterButton.addEventListener("click", () => {
+  backgroundMusic.volume = 0.25;
+  backgroundMusic.play();
+
   introScreen.classList.add("hide");
   document.body.classList.remove("intro-active");
 
   setTimeout(() => {
     introScreen.style.display = "none";
   }, 1000);
+});
+const musicToggle = document.getElementById("music-toggle");
+
+musicToggle.addEventListener("click", () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    musicToggle.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+  } else {
+    backgroundMusic.pause();
+    musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+  }
 });
